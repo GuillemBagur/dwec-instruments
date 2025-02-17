@@ -1,5 +1,5 @@
 import { Volume2 } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Instrument.css";
 
@@ -11,6 +11,20 @@ export default function Instrument({
   sound,
   genres,
 }) {
+  let isPlaying = false;
+  let audio = new Audio(sound);
+
+  function handlePlay() {
+    isPlaying = !isPlaying;
+    
+    if (isPlaying) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+
+  }
+
   return (
     <div className="instrument">
       <section className="image-wrapper">
@@ -19,7 +33,7 @@ export default function Instrument({
       </section>
       <section className="content">
         <h3 className="title">{title}</h3>
-        <button className="play-sound">
+        <button className="play-sound" onClick={handlePlay}>
           <Volume2 />
         </button>
         <h4 className="subtitle">Historia</h4>

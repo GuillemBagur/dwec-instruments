@@ -11,3 +11,6 @@
 
 
 ## 17/02/2025
+
+- Crear y estilizar el componente Instrument
+- Agregar fuentes personalizadas
