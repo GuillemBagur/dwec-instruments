@@ -6,7 +6,7 @@ export default function Navbar() {
       <Link to="/">Logo</Link>
 
       <div>
-        <NavLink exact to="/">Inicio</NavLink>
+        <NavLink to="/">Inicio</NavLink>
         <NavLink to="/add">Añadir instrumento</NavLink>
         <NavLink to="/search">Buscar instrumentos</NavLink>
       </div>
