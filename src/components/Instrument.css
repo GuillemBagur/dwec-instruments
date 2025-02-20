@@ -50,6 +50,11 @@
   aspect-ratio: 1 / 1;
 }
 
+.instrument .play-sound.disabled {
+  opacity: .5;
+  cursor:not-allowed;
+}
+
 .instrument .play-sound svg {
   transform: translateY(2px);
   color: rgb(45, 90, 75);

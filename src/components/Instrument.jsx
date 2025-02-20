@@ -33,7 +33,7 @@ export default function Instrument({
       </section>
       <section className="content">
         <h3 className="title">{title}</h3>
-        <button className="play-sound" onClick={handlePlay}>
+        <button className={`play-sound ${!sound && "disabled"}`} onClick={handlePlay}>
           <Volume2 />
         </button>
         <h4 className="subtitle">Historia</h4>

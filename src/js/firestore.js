@@ -13,6 +13,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-
+export async function fsInstrumentAdd({title, type, origins, img, sound, genres}) {
+  return await addDoc(collection(db, "instruments"), {title, type, origins, img, sound, genres});
+}
 
 export { app };

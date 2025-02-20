@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import InstrumentSearch from "./pages/InstrumentSearch/InstrumentSearch";
 
 import "./App.css";
+import InstrumentAdd from "./pages/InstrumentAdd/InstrumentAdd";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
 
         <Route path="/search" element={<InstrumentSearch />} />
+        <Route path="/add" element={<InstrumentAdd />} />
       </Routes>
     </Router>
   );
