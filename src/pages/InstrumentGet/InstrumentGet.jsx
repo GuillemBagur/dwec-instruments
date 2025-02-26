@@ -2,6 +2,10 @@ import React from 'react'
 
 export default function InstrumentGet() {
   return (
-    <div>InstrumentGet</div>
+    <main>
+      <h1>Instrumento</h1>
+
+      
+    </main>
   )
 }

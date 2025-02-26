@@ -1,0 +1,18 @@
+.instrument-add .form {
+  width: 100%;
+  max-width: 40rem;
+  margin: auto;
+}
+
+.instrument-add .form-div {
+  margin-bottom: 2rem;
+}
+
+.instrument-add .form-div.last {
+  margin-bottom: 4rem;
+}
+
+.instrument-add .label {
+  display: block;
+  margin-bottom: .5rem;
+}

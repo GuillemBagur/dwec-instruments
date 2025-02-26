@@ -1,11 +1,12 @@
 import { Link, NavLink } from "react-router-dom"
+import "./Navbar.css";
 
 export default function Navbar() {
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/">Logo</Link>
 
-      <div>
+      <div className="links">
         <NavLink to="/">Inicio</NavLink>
         <NavLink to="/add">Añadir instrumento</NavLink>
         <NavLink to="/search">Buscar instrumentos</NavLink>

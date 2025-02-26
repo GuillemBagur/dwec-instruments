@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { fsInstrumentAdd } from "../../js/firestore";
 import { getBase64 } from "../../js/functions";
 
+import "./InstrumentAdd.css";
+import Multiselect from "../../components/Multiselect";
+
 export default function InstrumentAdd() {
   const [formData, setFormData] = useState({
     title: null,
@@ -16,70 +19,106 @@ export default function InstrumentAdd() {
     const field = e.target.id;
     const value = e.target.value;
 
-    setFormData(formData => {
-      return {...formData, [field]: value};
+    setFormData((formData) => {
+      return { ...formData, [field]: value };
     });
   }
 
-  function handleChangeBase64(e) {
-    const value = getBase64(e.target.files[0]);
-    const field = e.target.value;
+  async function handleChangeBase64(e) {
+    const value = await getBase64(e.target.files[0]);
+    const field = e.target.id;
 
-    setFormData(formData => {
-      return {...formData, [field]: value};
+    setFormData((formData) => {
+      return { ...formData, [field]: value };
+    });
+  }
+
+  function handleChangeGenres(value) {
+    setFormData((formData) => {
+      return { ...formData, "genres": value };
     });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-
-    console.log({...formData});
+    console.log({ ...formData });
     const instrument = await fsInstrumentAdd(formData);
     console.log(instrument);
   }
 
   return (
     <main className="instrument-add">
-      <h1>Añadir instrumento</h1>
+      <h1 className="title">Añadir instrumento</h1>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Título</label>
-          <input type="text" id="title" className="input" onChange={handleChange} />
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-div">
+          <label className="label" htmlFor="title">
+            Título
+          </label>
+          <input
+            type="text"
+            id="title"
+            className="input"
+            onChange={handleChange}
+          />
         </div>
 
-        <div>
-          <label htmlFor="type">Type</label>
-          <select id="type" onChange={handleChange}>
+        <div className="form-div">
+          <label className="label" htmlFor="type">
+            Tipo
+          </label>
+          <select id="type" className="input" onChange={handleChange}>
             <option value="">Selecciona una opción</option>
             <option value="cuerdas">Cuerdas</option>
           </select>
         </div>
 
-        <div>
-          <label htmlFor="origins">Orígenes</label>
-          <input type="text" id="origins" className="input" onChange={handleChange} />
+        <div className="form-div">
+          <label className="label" htmlFor="origins">
+            Orígenes
+          </label>
+          <input
+            type="text"
+            id="origins"
+            className="input"
+            onChange={handleChange}
+          />
         </div>
 
-        <div>
-          <label htmlFor="img">Imagen</label>
-          <input type="file" id="img" className="input" onChange={handleChangeBase64} />
+        <div className="form-div">
+          <label className="label" htmlFor="img">
+            Imagen
+          </label>
+          <input
+            type="file"
+            id="img"
+            className="input"
+            onChange={handleChangeBase64}
+          />
         </div>
 
-        <div>
-          <label htmlFor="sound">Sonido</label>
-          <input type="file" id="sound" className="input" onChange={handleChangeBase64} />
+        <div className="form-div">
+          <label className="label" htmlFor="sound">
+            Sonido
+          </label>
+          <input
+            type="file"
+            id="sound"
+            className="input"
+            onChange={handleChangeBase64}
+          />
         </div>
 
-        <div>
-          <label htmlFor="genres">Géneros</label>
-          <input type="text" id="genres" className="input" onChange={handleChange} />
+        <div className="form-div last">
+          <label className="label" htmlFor="genres">
+            Géneros
+          </label>
+
+          <Multiselect onChange={handleChangeGenres} options={["techno", "house", "rock", "pop"]} />
         </div>
 
-        <div>
-          <button type="submit">Crear</button>
-        </div>
+        <button type="submit" className="button block">Crear</button>
       </form>
     </main>
   );

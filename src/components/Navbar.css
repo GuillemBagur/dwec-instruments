@@ -1,0 +1,22 @@
+.navbar {
+  background-color: var(--color-primary);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar .links {
+  display: flex;
+  padding: 0;
+  gap: 1rem;
+}
+
+.navbar .links a {
+  color: white;
+  text-decoration: none;
+  transition: all .1s;
+}
+
+.navbar .links a:hover {
+  transform: translateY(-2px);
+}

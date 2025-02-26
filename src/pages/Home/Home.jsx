@@ -4,7 +4,7 @@ import Instrument from "../../components/Instrument";
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <h1>Inicio</h1>
 
       <p>
@@ -26,6 +26,6 @@ export default function Home() {
         sound={null}
         genres={["flamenco", "pop", "country"]}
       />
-    </div>
+    </main>
   );
 }

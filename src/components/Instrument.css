@@ -33,7 +33,7 @@
 
 .instrument .title {
   font-size: 1.8rem;
-  color: rgb(32, 32, 32);
+  color: var(--color-primary-dark);
   margin-top: 2rem;
   margin-bottom: 1rem;
   width: 80%;
@@ -43,7 +43,7 @@
   position: absolute;
   top: 2.5rem;
   right: 1rem;
-  background-color: aquamarine;
+  background-color: var(--color-primary-light);
   border: 0;
   height: 2.8rem;
   border-radius: 500px;
@@ -57,12 +57,12 @@
 
 .instrument .play-sound svg {
   transform: translateY(2px);
-  color: rgb(45, 90, 75);
+  color: var(--color-primary-dark);
 }
 
 .instrument .subtitle {
   font-size: 1.3rem;
-  color: rgb(32, 32, 32);
+  color: var(--color-primary-dark);
   margin: 0;
   margin-top: 2rem;
   margin-bottom: .5rem;
@@ -83,7 +83,8 @@
 
 .instrument .genre {
   padding: .6rem 1.2rem;
-  background-color: aquamarine;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
   border-radius: 200px;
   text-transform: capitalize;
 }

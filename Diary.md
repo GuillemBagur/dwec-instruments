@@ -14,3 +14,6 @@
 
 - Crear y estilizar el componente Instrument
 - Agregar fuentes personalizadas
+
+## 26/02/2025
+- Crear componente Multiselect
