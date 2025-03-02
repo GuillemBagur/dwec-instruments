@@ -1,0 +1,3 @@
+.instrument-type-select, .instrument-type-select option {
+  text-transform: capitalize;
+}

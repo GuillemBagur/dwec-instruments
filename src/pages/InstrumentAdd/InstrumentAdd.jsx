@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fsInstrumentAdd } from "../../js/firestore";
 import { getBase64 } from "../../js/functions";
 
 import "./InstrumentAdd.css";
-import Multiselect from "../../components/Multiselect";
+import InstrumentTypeSelect from "../../components/InstrumentTypeSelect";
+import GenreMultiselect from "../../components/GenreMultiselect";
 
 export default function InstrumentAdd() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,8 @@ export default function InstrumentAdd() {
     sound: null,
     genres: null,
   });
+  
+  const [toastVisible, setToastVisible] = useState(false);
 
   function handleChange(e) {
     const field = e.target.id;
@@ -44,8 +47,22 @@ export default function InstrumentAdd() {
 
     console.log({ ...formData });
     const instrument = await fsInstrumentAdd(formData);
+
+    if(instrument) {
+      setToastVisible(true);
+      e.target.reset();
+    }
     console.log(instrument);
   }
+
+
+  useEffect(function() {
+    if(toastVisible) {
+      setInterval(function() {
+        setToastVisible(false);
+      }, 3000);
+    }
+  }, [toastVisible]);
 
   return (
     <main className="instrument-add">
@@ -68,10 +85,7 @@ export default function InstrumentAdd() {
           <label className="label" htmlFor="type">
             Tipo
           </label>
-          <select id="type" className="input" onChange={handleChange}>
-            <option value="">Selecciona una opción</option>
-            <option value="cuerdas">Cuerdas</option>
-          </select>
+          <InstrumentTypeSelect handleChange={handleChange} />
         </div>
 
         <div className="form-div">
@@ -115,11 +129,13 @@ export default function InstrumentAdd() {
             Géneros
           </label>
 
-          <Multiselect onChange={handleChangeGenres} options={["techno", "house", "rock", "pop"]} />
+          <GenreMultiselect handleChangeGenres={handleChangeGenres} />
         </div>
 
         <button type="submit" className="button block">Crear</button>
       </form>
+
+      {toastVisible && <div className="toast">Instrumento añadido correctamente</div>}
     </main>
   );
 }

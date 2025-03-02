@@ -29,6 +29,7 @@
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
+  text-transform: capitalize;
 }
 
 .instrument .title {

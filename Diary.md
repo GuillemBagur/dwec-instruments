@@ -16,4 +16,13 @@
 - Agregar fuentes personalizadas
 
 ## 26/02/2025
+
 - Crear componente Multiselect
+
+## 02/03/2025
+
+- Fetch de los géneros musicales desde la DB
+- Fetch de los tipos de instrumentos desde la DB
+- Gestionar errores de enrutamiento
+- Implementar Search.jsx para mostrar los resultados de cada búsqueda por título
+- Añadir feedback al crear un instrumento

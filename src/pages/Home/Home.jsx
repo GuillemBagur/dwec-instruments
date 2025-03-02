@@ -1,8 +1,10 @@
 import React from "react";
-import Instrument from "../../components/Instrument";
+import InstrumentsList from "../../components/InstrumentsList";
 
 
 export default function Home() {
+  
+
   return (
     <main>
       <h1>Inicio</h1>
@@ -18,14 +20,8 @@ export default function Home() {
       </p>
 
       <h2>Instrumentos</h2>
-      <Instrument
-        title="Guitarra"
-        type="Cuerdas"
-        origins="Es un instrumento muy antiguo."
-        img="https://musicopolix.com/200249/valencia-guitarra-clasica-vc103-3-4-nat.jpg"
-        sound={null}
-        genres={["flamenco", "pop", "country"]}
-      />
+      
+      <InstrumentsList searchTitle="" />
     </main>
   );
 }

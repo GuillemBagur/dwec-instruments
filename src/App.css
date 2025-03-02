@@ -50,3 +50,13 @@ button {
   border-radius: 8px;
   font-size: 1rem;
 }
+
+.toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  border-radius: 3px;
+  color: white;
+  background-color: rgb(54, 109, 54);
+}
