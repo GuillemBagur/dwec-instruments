@@ -20,6 +20,6 @@ export default function InstrumentsList({ searchTitle }) {
   }, [searchTitle]);
 
   return (
-    <div className='instruments-list'>{instruments.map(instrument => <Instrument {...instrument} />)}</div>
+    <div className='instruments-list'>{instruments.map(instrument => <Instrument key={instrument.id} {...instrument} />)}</div>
   )
 }

@@ -2,6 +2,7 @@
   --color-primary: #3b4a26;
   --color-primary-dark: #181d11;
   --color-primary-light: #a4bb83;
+  --color-error: #d43a2f;
 }
 
 * {
@@ -45,6 +46,8 @@ button {
 .input {
   display: block;
   width: 100%;
+  max-width: 100%;
+  min-width: 100%;
   padding: .75rem;
   border: 2px solid var(--color-primary);
   border-radius: 8px;

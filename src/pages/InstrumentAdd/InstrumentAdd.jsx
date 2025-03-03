@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { isValidElement, useEffect, useState } from "react";
 import { fsInstrumentAdd } from "../../js/firestore";
-import { getBase64 } from "../../js/functions";
+import { checkBase64FileType, checkBase64Size, getBase64 } from "../../js/functions";
 
 import "./InstrumentAdd.css";
 import InstrumentTypeSelect from "../../components/InstrumentTypeSelect";
@@ -14,6 +14,15 @@ export default function InstrumentAdd() {
     img: null,
     sound: null,
     genres: null,
+  });
+
+  const [errors, setErrors] = useState({
+    title: "",
+    type: "",
+    origins: "",
+    img: "",
+    sound: "",
+    genres: "",
   });
   
   const [toastVisible, setToastVisible] = useState(false);
@@ -42,8 +51,80 @@ export default function InstrumentAdd() {
     });
   }
 
+  function validateForm() {
+    let isValid = true;
+
+    // Check all fields have content
+    for(let [field, data] of Object.entries(formData)) {
+      if(!data || data?.length == 0) {
+        isValid = false;
+        setErrors(prevErrors => {
+          return {...prevErrors, [field]: "Este campo es requerido."};
+        });
+
+      } else {
+        // Si el campo es válido, la validación solamente seguirá como correcta si antes lo era (un solo campo erróneo no pasa la validación).
+        isValid = isValid && true;
+        setErrors(prevErrors => {
+          return {...prevErrors, [field]: ""};
+        });
+      }
+    }
+
+    /* isValid = isValid && checkTextLength("title", formData.title, 50);
+    isValid = isValid && checkTextLength("origins", formData.origins, 200); */
+    
+    if(formData.title.length > 50) {
+      isValid = false;
+      setErrors(prevErrors => {
+        return {...prevErrors, title: "El título no puede tener más de 50 caracteres."};
+      });
+    }
+
+    if(formData.origins.length > 300) {
+      isValid = false;
+      setErrors(prevErrors => {
+        return {...prevErrors, origins: "Los orígenes no pueden tener más de 300 caracteres."};
+      });
+    }
+
+    if(!checkBase64Size(formData.img, 1)) {
+      isValid = false;
+      setErrors(prevErrors => {
+        return {...prevErrors, img: "La imagen puede pesar 1Mb máximo."};
+      });
+    }
+
+    if(!checkBase64FileType(formData.img, ["image/png", "image/jpg", "image/jpeg", "image/gif", "image/webp"])) {
+      isValid = false;
+      setErrors(prevErrors => {
+        return {...prevErrors, img: "El tipo de archivo no es válido."};
+      });
+    }
+
+    if(!checkBase64Size(formData.sound, 1)) {
+      isValid = false;
+      setErrors(prevErrors => {
+        return {...prevErrors, sound: "El sonido puede pesar 1Mb máximo."};
+      });
+    }
+
+    if(!checkBase64FileType(formData.sound, ["audio/wav", "audio/mpeg"])) {
+      isValid = false;
+      setErrors(prevErrors => {
+        return {...prevErrors, sound: "El tipo de archivo no es válido."};
+      });
+    }
+    
+    return isValid;
+  }
+  
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if(!validateForm()) {
+      return;
+    }
 
     console.log({ ...formData });
     const instrument = await fsInstrumentAdd(formData);
@@ -79,6 +160,7 @@ export default function InstrumentAdd() {
             className="input"
             onChange={handleChange}
           />
+          {errors.title && <span className="error">{errors.title}</span>}
         </div>
 
         <div className="form-div">
@@ -86,18 +168,20 @@ export default function InstrumentAdd() {
             Tipo
           </label>
           <InstrumentTypeSelect handleChange={handleChange} />
+          {errors.type && <span className="error">{errors.type}</span>}
         </div>
 
         <div className="form-div">
           <label className="label" htmlFor="origins">
             Orígenes
           </label>
-          <input
+          <textarea
             type="text"
             id="origins"
             className="input"
             onChange={handleChange}
           />
+          {errors.origins && <span className="error">{errors.origins}</span>}
         </div>
 
         <div className="form-div">
@@ -110,6 +194,7 @@ export default function InstrumentAdd() {
             className="input"
             onChange={handleChangeBase64}
           />
+          {errors.img && <span className="error">{errors.img}</span>}
         </div>
 
         <div className="form-div">
@@ -122,6 +207,7 @@ export default function InstrumentAdd() {
             className="input"
             onChange={handleChangeBase64}
           />
+          {errors.sound && <span className="error">{errors.sound}</span>}
         </div>
 
         <div className="form-div last">
@@ -130,6 +216,7 @@ export default function InstrumentAdd() {
           </label>
 
           <GenreMultiselect handleChangeGenres={handleChangeGenres} />
+          {errors.genres && <span className="error">{errors.genres}</span>}
         </div>
 
         <button type="submit" className="button block">Crear</button>

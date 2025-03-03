@@ -16,3 +16,9 @@
   display: block;
   margin-bottom: .5rem;
 }
+
+.instrument-add .error {
+  display: block;
+  color: var(--color-error);
+  margin-top: .3rem;
+}

@@ -17,7 +17,7 @@ export default function InstrumentTypeSelect({handleChange}) {
   return (
     <select id="type" className="input instrument-type-select" onChange={handleChange}>
       <option value="">Selecciona una opción</option>
-      {instrumentTypes.map(instrumentType => <option value={instrumentType.title}>{instrumentType.title}</option>)}
+      {instrumentTypes.map(instrumentType => <option key={instrumentType.key} value={instrumentType.title}>{instrumentType.title}</option>)}
     </select>
   );
 }
