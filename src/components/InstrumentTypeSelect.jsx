@@ -4,7 +4,7 @@ import { db } from "../config/firebaseConfig";
 
 import "./InstrumentTypeSelect.css";
 
-export default function InstrumentTypeSelect({handleChange}) {
+export default function InstrumentTypeSelect({handleChange, defaultValue}) {
   const [instrumentTypes, setInstrumentTypes] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function InstrumentTypeSelect({handleChange}) {
   return (
     <select id="type" className="input instrument-type-select" onChange={handleChange}>
       <option value="">Selecciona una opción</option>
-      {instrumentTypes.map(instrumentType => <option key={instrumentType.key} value={instrumentType.title}>{instrumentType.title}</option>)}
+      {instrumentTypes.map(instrumentType => <option key={instrumentType.key} selected={defaultValue == instrumentType.title} value={instrumentType.title}>{instrumentType.title}</option>)}
     </select>
   );
 }

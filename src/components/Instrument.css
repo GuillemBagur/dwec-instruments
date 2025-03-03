@@ -8,6 +8,8 @@
 .instrument img {
   height: 10rem;
   width: 100%;
+  pointer-events: none;
+  user-select: none;
   object-fit: contain;
 }
 
@@ -88,4 +90,10 @@
   color: var(--color-primary-dark);
   border-radius: 200px;
   text-transform: capitalize;
+}
+
+.instrument .buttons {
+  display: flex;
+  gap: .5rem;
+  padding: .5rem;
 }

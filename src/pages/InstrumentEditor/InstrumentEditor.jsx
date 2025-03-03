@@ -1,19 +1,25 @@
 import React, { isValidElement, useEffect, useState } from "react";
-import { fsInstrumentAdd } from "../../js/firestore";
 import { checkBase64FileType, checkBase64Size, getBase64 } from "../../js/functions";
 
-import "./InstrumentAdd.css";
+import "./InstrumentEditor.css";
 import InstrumentTypeSelect from "../../components/InstrumentTypeSelect";
 import GenreMultiselect from "../../components/GenreMultiselect";
+import { useParams } from "react-router-dom";
+import { addDoc, collection, doc, documentId, getDoc } from "firebase/firestore";
+import { db } from "../../config/firebaseConfig";
 
-export default function InstrumentAdd() {
+export default function InstrumentEditor() {
+  const {instrumentId} = useParams();
+
+  const [updateMultiselect, setUpdateMultiselect] = useState(false);
+
   const [formData, setFormData] = useState({
     title: null,
     type: null,
     origins: null,
     img: null,
     sound: null,
-    genres: null,
+    genres: [],
   });
 
   const [errors, setErrors] = useState({
@@ -71,17 +77,14 @@ export default function InstrumentAdd() {
       }
     }
 
-    /* isValid = isValid && checkTextLength("title", formData.title, 50);
-    isValid = isValid && checkTextLength("origins", formData.origins, 200); */
-    
-    if(formData.title.length > 50) {
+    if(formData.title?.length > 50) {
       isValid = false;
       setErrors(prevErrors => {
         return {...prevErrors, title: "El título no puede tener más de 50 caracteres."};
       });
     }
 
-    if(formData.origins.length > 300) {
+    if(formData.origins?.length > 300) {
       isValid = false;
       setErrors(prevErrors => {
         return {...prevErrors, origins: "Los orígenes no pueden tener más de 300 caracteres."};
@@ -127,12 +130,14 @@ export default function InstrumentAdd() {
     }
 
     console.log({ ...formData });
-    const instrument = await fsInstrumentAdd(formData);
+    const instrument = await addDoc(collection(db, "instruments"), formData);
 
     if(instrument) {
       setToastVisible(true);
       e.target.reset();
+      setUpdateMultiselect(!updateMultiselect);
     }
+    
     console.log(instrument);
   }
 
@@ -145,9 +150,39 @@ export default function InstrumentAdd() {
     }
   }, [toastVisible]);
 
+  async function fechInstrumentData(instrumentId) {
+    if(!instrumentId) {
+      return;
+    }
+
+    const snapshot = await getDoc(doc(db, "instruments", instrumentId));
+
+    if(snapshot.exists()) {
+      const instrumentData = snapshot.data();
+
+      setFormData({
+        title: instrumentData.title,
+        type: instrumentData.type,
+        origins: instrumentData.origins,
+        img: instrumentData.img,
+        sound: instrumentData.sound,
+        genres: instrumentData.genres,
+      });
+
+    } else {
+      console.log("Ha habido un error.");
+
+    }
+  }
+
+  useEffect(function() {
+    fechInstrumentData(instrumentId);
+
+  }, [instrumentId]);
+
   return (
     <main className="instrument-add">
-      <h1 className="title">Añadir instrumento</h1>
+      <h1 className="title">Editor de instrumentos</h1>
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-div">
@@ -159,6 +194,7 @@ export default function InstrumentAdd() {
             id="title"
             className="input"
             onChange={handleChange}
+            defaultValue={formData.title}
           />
           {errors.title && <span className="error">{errors.title}</span>}
         </div>
@@ -167,7 +203,7 @@ export default function InstrumentAdd() {
           <label className="label" htmlFor="type">
             Tipo
           </label>
-          <InstrumentTypeSelect handleChange={handleChange} />
+          <InstrumentTypeSelect defaultValue={formData.type} handleChange={handleChange} />
           {errors.type && <span className="error">{errors.type}</span>}
         </div>
 
@@ -180,6 +216,7 @@ export default function InstrumentAdd() {
             id="origins"
             className="input"
             onChange={handleChange}
+            defaultValue={formData.origins}
           />
           {errors.origins && <span className="error">{errors.origins}</span>}
         </div>
@@ -193,6 +230,7 @@ export default function InstrumentAdd() {
             id="img"
             className="input"
             onChange={handleChangeBase64}
+            defaultValue={formData.img}
           />
           {errors.img && <span className="error">{errors.img}</span>}
         </div>
@@ -206,6 +244,7 @@ export default function InstrumentAdd() {
             id="sound"
             className="input"
             onChange={handleChangeBase64}
+            defaultValue={formData.sound}
           />
           {errors.sound && <span className="error">{errors.sound}</span>}
         </div>
@@ -215,11 +254,11 @@ export default function InstrumentAdd() {
             Géneros
           </label>
 
-          <GenreMultiselect handleChangeGenres={handleChangeGenres} />
+          <GenreMultiselect update={updateMultiselect} defaultValue={formData.genres} handleChangeGenres={handleChangeGenres} />
           {errors.genres && <span className="error">{errors.genres}</span>}
         </div>
 
-        <button type="submit" className="button block">Crear</button>
+        <button type="submit" className="button block big">Crear</button>
       </form>
 
       {toastVisible && <div className="toast">Instrumento añadido correctamente</div>}

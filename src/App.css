@@ -15,6 +15,10 @@ body {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 main {
   padding: 1.5rem;
 }
@@ -24,13 +28,22 @@ button {
 }
 
 .button {
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: .75rem;
   color: white;
   font-weight: bold;
   border: 2px solid var(--color-primary);
   border-radius: 8px;
   background-color: var(--color-primary);
+}
+
+.button.big {
+  font-size: 1.2rem;
+}
+
+.button.delete {
+  border: 2px solid var(--color-error);
+  background-color: var(--color-error);
 }
 
 .button.block {

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Multiselect.css";
 import { CircleX } from "lucide-react";
 
-export default function Multiselect({ options, onChange }) {
-  const [elements, setElements] = useState([]);
+export default function Multiselect({ options, onChange, update, defaultValue }) {
+  const [elements, setElements] = useState(defaultValue);
   const [showOptions, setShowOptions] = useState(false);
   
   function handleSelect(option) {
@@ -14,6 +14,11 @@ export default function Multiselect({ options, onChange }) {
   useEffect(function() {
     onChange(elements);
   }, [elements]);
+
+  useEffect(function() {
+    setElements(defaultValue);
+
+  }, [update, defaultValue]);
 
   function hideOptions() {
     setShowOptions(false);

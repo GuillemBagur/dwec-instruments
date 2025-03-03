@@ -6,19 +6,16 @@ import Home from "./pages/Home/Home";
 import InstrumentSearch from "./pages/InstrumentSearch/InstrumentSearch";
 
 import "./App.css";
-import InstrumentAdd from "./pages/InstrumentAdd/InstrumentAdd";
+import InstrumentEditor from "./pages/InstrumentEditor/InstrumentEditor";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Router>
       <Navbar />
 
       <Routes>
-
         <Route path="/search" element={<InstrumentSearch />} />
-        <Route path="/add" element={<InstrumentAdd />} />
+        <Route path="/editor/:instrumentId?" element={<InstrumentEditor />} />
         <Route exact path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

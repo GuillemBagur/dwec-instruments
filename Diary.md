@@ -31,3 +31,5 @@
 
 - Añadir validaciones al formulario
 - Cambiar favicon
+- Añadir funcionalidad de borrar instrumentos
+- Añadir funcionalidad de editar instrumentos y refactorizar el código para reutilizar el mismo formulario que para añadir instrumentos

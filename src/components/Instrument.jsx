@@ -2,8 +2,11 @@ import { Volume2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 import "./Instrument.css";
+import InstrumentDelete from "./InstrumentDelete";
+import InstrumentEdit from "./InstrumentEdit";
 
 export default function Instrument({
+  id,
   title,
   type,
   origins,
@@ -46,6 +49,11 @@ export default function Instrument({
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="buttons">
+        <InstrumentEdit instrumentId={id} />
+        <InstrumentDelete instrumentId={id} />
       </section>
     </div>
   );

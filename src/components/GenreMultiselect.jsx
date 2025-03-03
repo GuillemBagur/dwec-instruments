@@ -3,7 +3,7 @@ import { db } from "../config/firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
 import Multiselect from "./Multiselect";
 
-export default function GenreMultiselect({handleChangeGenres}) {
+export default function GenreMultiselect({handleChangeGenres, update, defaultValue}) {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
@@ -13,5 +13,5 @@ export default function GenreMultiselect({handleChangeGenres}) {
 
   }, []);
 
-  return (<Multiselect onChange={handleChangeGenres} options={genres} />)
+  return (<Multiselect update={update} defaultValue={defaultValue} onChange={handleChangeGenres} options={genres} />)
 }
