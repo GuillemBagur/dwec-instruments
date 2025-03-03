@@ -26,3 +26,8 @@
 - Gestionar errores de enrutamiento
 - Implementar Search.jsx para mostrar los resultados de cada búsqueda por título
 - Añadir feedback al crear un instrumento
+
+## 03/03/2025
+
+- Añadir validaciones al formulario
+- Cambiar favicon
