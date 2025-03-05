@@ -1,5 +1,5 @@
 import React, { isValidElement, useEffect, useState } from "react";
-import { checkBase64FileType, checkBase64Size, getBase64 } from "../../js/functions";
+import { checkBase64FileType, checkBase64Size, fechInstrumentData, getBase64 } from "../../js/functions";
 
 import "./InstrumentEditor.css";
 import InstrumentTypeSelect from "../../components/InstrumentTypeSelect";
@@ -84,10 +84,10 @@ export default function InstrumentEditor() {
       });
     }
 
-    if(formData.origins?.length > 300) {
+    if(formData.origins?.length > 1000) {
       isValid = false;
       setErrors(prevErrors => {
-        return {...prevErrors, origins: "Los orígenes no pueden tener más de 300 caracteres."};
+        return {...prevErrors, origins: "Los orígenes no pueden tener más de 1000 caracteres."};
       });
     }
 
@@ -129,7 +129,6 @@ export default function InstrumentEditor() {
       return;
     }
 
-    console.log({ ...formData });
     const instrument = await addDoc(collection(db, "instruments"), formData);
 
     if(instrument) {
@@ -137,8 +136,6 @@ export default function InstrumentEditor() {
       e.target.reset();
       setUpdateMultiselect(!updateMultiselect);
     }
-    
-    console.log(instrument);
   }
 
 
@@ -150,33 +147,10 @@ export default function InstrumentEditor() {
     }
   }, [toastVisible]);
 
-  async function fechInstrumentData(instrumentId) {
-    if(!instrumentId) {
-      return;
-    }
-
-    const snapshot = await getDoc(doc(db, "instruments", instrumentId));
-
-    if(snapshot.exists()) {
-      const instrumentData = snapshot.data();
-
-      setFormData({
-        title: instrumentData.title,
-        type: instrumentData.type,
-        origins: instrumentData.origins,
-        img: instrumentData.img,
-        sound: instrumentData.sound,
-        genres: instrumentData.genres,
-      });
-
-    } else {
-      console.log("Ha habido un error.");
-
-    }
-  }
+  
 
   useEffect(function() {
-    fechInstrumentData(instrumentId);
+    fechInstrumentData(instrumentId, setFormData);
 
   }, [instrumentId]);
 
@@ -258,10 +232,10 @@ export default function InstrumentEditor() {
           {errors.genres && <span className="error">{errors.genres}</span>}
         </div>
 
-        <button type="submit" className="button block big">Crear</button>
+        <button type="submit" className="button block big">{instrumentId ? "Editar" : "Crear"}</button>
       </form>
 
-      {toastVisible && <div className="toast">Instrumento añadido correctamente</div>}
+      {toastVisible && <div className="toast">Instrumento {instrumentId ? "editado" : "creado"} correctamente</div>}
     </main>
   );
 }

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import "./Instrument.css";
 import InstrumentDelete from "./InstrumentDelete";
 import InstrumentEdit from "./InstrumentEdit";
+import { Link } from "react-router-dom";
+import PlaySound from "./PlaySound";
 
 export default function Instrument({
   id,
@@ -14,19 +16,6 @@ export default function Instrument({
   sound,
   genres,
 }) {
-  let isPlaying = false;
-  let audio = new Audio(sound);
-
-  function handlePlay() {
-    isPlaying = !isPlaying;
-    
-    if (isPlaying) {
-      audio.play();
-    } else {
-      audio.pause();
-    }
-
-  }
 
   return (
     <div className="instrument">
@@ -36,9 +25,7 @@ export default function Instrument({
       </section>
       <section className="content">
         <h3 className="title">{title}</h3>
-        <button className={`play-sound ${!sound && "disabled"}`} onClick={handlePlay}>
-          <Volume2 />
-        </button>
+        <PlaySound sound={sound} />
         <h4 className="subtitle">Historia</h4>
         <p className="p">{origins}</p>
         <h4 className="subtitle">Géneros</h4>
@@ -52,6 +39,7 @@ export default function Instrument({
       </section>
 
       <section className="buttons">
+        <Link className="button" to={`/instrument/${id}`}>Ver más</Link>
         <InstrumentEdit instrumentId={id} />
         <InstrumentDelete instrumentId={id} />
       </section>

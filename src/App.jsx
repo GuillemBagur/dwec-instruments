@@ -7,6 +7,7 @@ import InstrumentSearch from "./pages/InstrumentSearch/InstrumentSearch";
 
 import "./App.css";
 import InstrumentEditor from "./pages/InstrumentEditor/InstrumentEditor";
+import InstrumentGet from "./pages/InstrumentGet/InstrumentGet";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
       <Routes>
         <Route path="/search" element={<InstrumentSearch />} />
+        <Route path="/instrument/:instrumentId" element={<InstrumentGet />} />
         <Route path="/editor/:instrumentId?" element={<InstrumentEditor />} />
         <Route exact path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" />} />

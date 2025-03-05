@@ -10,13 +10,7 @@ export default function Home() {
       <h1>Inicio</h1>
 
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde quasi hic
-        voluptate cumque enim eum distinctio, praesentium nesciunt atque aliquid
-        at. Architecto, atque. Obcaecati optio accusamus, temporibus vitae ullam
-        consequuntur. Veritatis numquam qui quod deserunt, enim soluta dolorum
-        in odio sed eveniet labore aut pariatur praesentium doloribus voluptas
-        odit, culpa recusandae, reprehenderit repudiandae molestiae provident?
-        Optio ex non ab dolores?
+        Este sitio es un repositorio de instrumentos. Aquí encotrarás los más típicos clasificados por tipo, un poco de historia sobre sus orígenes y un listado de los géneros donde se suele usar. Siempre acompañado de una imagen y una muestra del sonido del instrumento. Sistema programado con React y Firebase Firestore.
       </p>
 
       <h2>Instrumentos</h2>

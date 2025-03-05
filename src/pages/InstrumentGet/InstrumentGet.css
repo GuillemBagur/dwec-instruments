@@ -1,0 +1,94 @@
+.instrument-get {
+  position: relative;
+  display: block;
+  margin: auto;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.instrument-get img {
+  height: 16rem;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+  object-fit: contain;
+}
+
+.instrument-get .image-wrapper {
+  position: relative;
+}
+
+.instrument-get .content {
+  position: relative;
+  padding: .7rem;
+}
+
+.instrument-get .type {
+  display: inline-block;
+  padding: .5rem .8rem;
+  border-radius: 400px;
+  color: white;
+  font-size: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+}
+
+.instrument-get .title {
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  width: 80%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.instrument-get .play-sound {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.instrument-get .subtitle {
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+  margin: 0;
+  margin-top: 2rem;
+  margin-bottom: .5rem;
+}
+
+.instrument-get .p {
+  color: rgb(64, 64, 64);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.instrument-get .genres {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: 0;
+}
+
+.instrument-get .genre {
+  padding: .6rem 1.2rem;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-radius: 200px;
+  text-transform: capitalize;
+}
+
+.instrument-get .buttons {
+  margin-top: 5rem;
+}
+
+.instrument-get .buttons * {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}

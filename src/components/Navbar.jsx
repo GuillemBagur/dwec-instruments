@@ -4,7 +4,7 @@ import "./Navbar.css";
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <Link to="/">Logo</Link>
+      <Link to="/">Instrumentos</Link>
 
       <div className="links">
         <NavLink to="/">Inicio</NavLink>

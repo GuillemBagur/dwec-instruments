@@ -33,3 +33,10 @@
 - Cambiar favicon
 - Añadir funcionalidad de borrar instrumentos
 - Añadir funcionalidad de editar instrumentos y refactorizar el código para reutilizar el mismo formulario que para añadir instrumentos
+
+## 05/03/2025
+
+- Solucionar bug reproducir audio
+- Crear InstrumentGet.jsx
+- Convertir botón sonido en el componente PlaySound.jsx
+- Arreglar grid de instrumentos

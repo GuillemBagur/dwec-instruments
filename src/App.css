@@ -1,5 +1,6 @@
 :root {
   --color-primary: #3b4a26;
+  --color-secondary: #816c0a;
   --color-primary-dark: #181d11;
   --color-primary-light: #a4bb83;
   --color-error: #d43a2f;
@@ -39,6 +40,11 @@ button {
 
 .button.big {
   font-size: 1.2rem;
+}
+
+.button.secondary {
+  border: 2px solid var(--color-secondary);
+  background-color: var(--color-secondary);
 }
 
 .button.delete {

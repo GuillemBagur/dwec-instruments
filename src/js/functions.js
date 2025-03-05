@@ -1,3 +1,6 @@
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "../config/firebaseConfig"
+
 export async function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -22,3 +25,28 @@ export function checkBase64FileType(base64, allowedTypes) {
 
   return allowedTypesRegex.test(base64);
 }
+
+export async function fechInstrumentData(instrumentId, callback) {
+    if(!instrumentId) {
+      return;
+    }
+
+    const snapshot = await getDoc(doc(db, "instruments", instrumentId));
+
+    if(snapshot.exists()) {
+      const instrumentData = snapshot.data();
+
+      callback({
+        title: instrumentData.title,
+        type: instrumentData.type,
+        origins: instrumentData.origins,
+        img: instrumentData.img,
+        sound: instrumentData.sound,
+        genres: instrumentData.genres,
+      });
+
+    } else {
+      console.log("Ha habido un error.");
+
+    }
+  }

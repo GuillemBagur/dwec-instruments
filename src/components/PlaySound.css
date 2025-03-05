@@ -1,0 +1,17 @@
+.play-sound {
+  background-color: var(--color-primary-light);
+  border: 0;
+  height: 2.8rem;
+  border-radius: 500px;
+  aspect-ratio: 1 / 1;
+}
+
+.play-sound.disabled {
+  opacity: .5;
+  cursor:not-allowed;
+}
+
+.play-sound svg {
+  transform: translateY(2px);
+  color: var(--color-primary-dark);
+}
