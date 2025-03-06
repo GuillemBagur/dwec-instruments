@@ -5,7 +5,7 @@ import "./InstrumentsList.css";
 import { db } from "../config/firebaseConfig";
 import { Link } from "react-router-dom";
 
-export default function InstrumentsList({ searchTitle }) {
+export default function InstrumentsList({ search }) {
   const [instruments, setInstruments] = useState([]);
 
   useEffect(() => {
@@ -16,13 +16,16 @@ export default function InstrumentsList({ searchTitle }) {
       }));
 
       // Filtramos la búsqueda en local ya que Firebase no permite este tipo de búsquedas
-      instruments = instruments.filter((instrument) =>
-        instrument.title.toLowerCase().includes(searchTitle.toLowerCase())
+      instruments = instruments.filter(
+        (instrument) =>
+          instrument.title.toLowerCase().includes(search.toLowerCase()) ||
+          instrument.type.includes(search.toLowerCase()) ||
+          instrument.genres.find(genre => genre.includes(search.toLowerCase()))
       );
 
       setInstruments(instruments);
     });
-  }, [searchTitle]);
+  }, [search]);
 
   if (instruments.length === 0) {
     return (

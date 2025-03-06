@@ -8,8 +8,8 @@ export default function Navbar() {
 
       <div className="links">
         <NavLink to="/">Inicio</NavLink>
-        <NavLink to="/editor">Añadir instrumento</NavLink>
-        <NavLink to="/search">Buscar instrumentos</NavLink>
+        <NavLink to="/editor">Añadir</NavLink>
+        <NavLink to="/search">Buscar</NavLink>
       </div>
     </nav>
   )

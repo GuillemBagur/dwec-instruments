@@ -15,7 +15,7 @@ export default function Home() {
 
       <h2>Instrumentos</h2>
       
-      <InstrumentsList searchTitle="" />
+      <InstrumentsList search="" />
     </main>
   );
 }

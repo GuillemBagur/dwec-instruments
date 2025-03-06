@@ -40,3 +40,6 @@
 - Crear InstrumentGet.jsx
 - Convertir botón sonido en el componente PlaySound.jsx
 - Arreglar grid de instrumentos
+
+## 06/03/2025
+- Añadir datos reales

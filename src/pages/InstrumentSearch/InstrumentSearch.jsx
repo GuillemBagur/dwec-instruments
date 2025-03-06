@@ -17,7 +17,7 @@ export default function InstrumentSearch() {
       <InputSearch onInput={handleInput} />
 
       <section className='instruments'>
-        <InstrumentsList searchTitle={instrumentSearch} />
+        <InstrumentsList search={instrumentSearch} />
       </section>
     </main>
   )
